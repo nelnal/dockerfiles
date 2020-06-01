@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    container_name: mysql_srv
+    build:
+      context: .
+      dockerfile: db/Dockerfile
+    working_dir: /srv
+    environment:
+      MYSQL_ROOT_PASSWORD: p@ssWord2
+      MYSQL_DATABASE: dev_database
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./db/output:/srv/output
+      - ./db/sql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
