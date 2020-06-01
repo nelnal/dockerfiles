@@ -1,5 +1,8 @@
 FROM centos:7
 
+ADD amqp/launcher.sh /srv/launcher.sh
+ADD amqp/qpidd.conf /etc/qpid/qpidd.conf
+
 RUN : && \
     yum -y install \
       vim unzip wget git gcc-c:: make cmake maven swig \
@@ -10,12 +13,8 @@ RUN : && \
           mono-devel python34-devel jsoncpp-devel nodejs-rhea \
           qpid-proton-cpp-devel python-qpid-proton qpid-proton-cpp-devel python2-qpid-proton \
           qpid-cpp-server qpid-cpp-client-devel python-qpid qpid-qpid-client-rdma qpid-tools && \
+    chmod 755 /srv/launcher.sh && \
     :
-
-ADD launcher.sh /srv/launcher.sh
-ADD qpidd.conf /etc/qpid/qpidd.conf
-
-RUN chmod 755 /srv/launcher.sh
 
 EXPOSE 5672
 

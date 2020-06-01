@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  amqp:
+    container_name: amqp_srv
+    build:
+      context: .
+      dockerfile: amqp/Dockerfile
+    working_dir: /srv
+    volumes:
+      - ./amqp/drain:/srv/drain
+      - ./amqp/spout:/srv/spout
+      - ./amqp/telegrams:/srv/telegrams
+    ports:
+      - 5672:5672
+    tty: true
