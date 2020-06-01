@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  amqp:
+    container_name: amqp_srv
+    image: rabbitmq-3.8-management
+    working_dir: /srv
+    volumes:
+      - ./amqp/definitions.json:/etc/rabbitmq/definitions.json
+      - ./amqp/enabled_plugins:/etc/rabbitmq/enabled_plugins
+      - ./amqp/output:/srv/output
+      - ./amqp/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    ports:
+      - 5672:5672
+      - 15672:15672
+
