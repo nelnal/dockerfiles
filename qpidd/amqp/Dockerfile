@@ -1,7 +1,7 @@
 FROM centos:7
 
-ADD amqp/launcher.sh /srv/launcher.sh
-ADD amqp/qpidd.conf /etc/qpid/qpidd.conf
+COPY amqp/launcher.sh /srv/launcher.sh
+COPY amqp/qpidd.conf /etc/qpid/qpidd.conf
 
 RUN : && \
     yum -y install \

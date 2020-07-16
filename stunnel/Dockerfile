@@ -19,27 +19,27 @@ RUN     : \
     &&  test "${DEST_HOST}:${DEST_PORT}" != "localhost" \
     # stunnel.conf ファイルを作成する
     &&  { \
-          echo    "foreground = yes"; \
-          echo    "debug = 7"; \
-          echo    ""; \
-          echo    "output = /var/log/stunnel.log"; \
-          echo    "pid = /var/run/stunnel/stunnel.pid"; \
-          echo    ""; \
-          echo    "setuid = stunnel"; \
-          echo    "setgid = stunnel"; \
-          echo    "socket = l:TCP_NODELAY=1"; \
-          echo    "socket = r:TCP_NODELAY=1"; \
-          echo    ""; \
-          echo -e "[${DEST_NAME:?}]"; \
-          echo    "sslVersion = all"; \
-          echo    "client = yes"; \
-          echo    "delay = yes"; \
-          echo -e "accept = ${ACCESS_PORT:?}"; \
-          echo -e "connect = ${DEST_HOST:?}:${DEST_PORT:?}"; \
-          echo    "verifyPeer = no"; \
-          echo    "CApath = /etc/stunnel"; \
-          echo    "cert = /etc/stunnel/certs.pem"; \
-          echo    "key = /etc/stunnel/key.pem"; \
+          echo "foreground = yes"; \
+          echo "debug = 7"; \
+          echo ""; \
+          echo "output = /var/log/stunnel.log"; \
+          echo "pid = /var/run/stunnel/stunnel.pid"; \
+          echo ""; \
+          echo "setuid = stunnel"; \
+          echo "setgid = stunnel"; \
+          echo "socket = l:TCP_NODELAY=1"; \
+          echo "socket = r:TCP_NODELAY=1"; \
+          echo ""; \
+          echo "[${DEST_NAME:?}]"; \
+          echo "sslVersion = all"; \
+          echo "client = yes"; \
+          echo "delay = yes"; \
+          echo "accept = ${ACCESS_PORT:?}"; \
+          echo "connect = ${DEST_HOST:?}:${DEST_PORT:?}"; \
+          echo "verifyPeer = no"; \
+          echo "CApath = /etc/stunnel"; \
+          echo "cert = /etc/stunnel/certs.pem"; \
+          echo "key = /etc/stunnel/key.pem"; \
         } | tee /etc/stunnel/stunnel.conf \
     &&  chmod 600 /etc/stunnel/certs.pem \
     &&  chmod 600 /etc/stunnel/key.pem \
@@ -52,10 +52,10 @@ RUN     : \
     &&  touch /var/run/stunnel \
     &&  chown -R stunnel:stunnel /var/run/stunnel \
     &&  { \
-          echo    "#!/bin/ash"; \
-          echo    ""; \
-          echo    "exec stunnel"; \
-        } | tee /srv/launcher.sh
+          echo "#!/bin/ash"; \
+          echo ""; \
+          echo "exec stunnel"; \
+        } | tee /srv/launcher.sh \
     &&  chmod +x /srv/launcher.sh \
     &&  :
 

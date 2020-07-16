@@ -1,9 +1,15 @@
 FROM golang:1.12-stretch as builder
 
+WORKDIR /go/src/github.com/k0kubun/sqldef
+
 RUN : \
-    &&  apt -y update \
+    &&  apt-get -y update \
     &&  go get -u github.com/k0kubun/sqldef \
-    &&  cd /go/src/github.com/k0kubun/sqldef \
+    &&  :
+
+WORKDIR /go/src/github.com/k0kubun/sqldef
+
+RUN : \
     &&  make \
     &&  :
 
