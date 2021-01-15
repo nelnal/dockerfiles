@@ -1,17 +1,18 @@
 FROM golang:1.12-stretch as builder
 
+ENV   GOPATH=/go \
+      GO11MODULE=on
+
+RUN   : \
+  &&  apt-get -y update \
+  &&  go get -u github.com/k0kubun/sqldef \
+  &&  :
+
 WORKDIR /go/src/github.com/k0kubun/sqldef
 
-RUN : \
-    &&  apt-get -y update \
-    &&  go get -u github.com/k0kubun/sqldef \
-    &&  :
-
-WORKDIR /go/src/github.com/k0kubun/sqldef
-
-RUN : \
-    &&  make \
-    &&  :
+RUN   : \
+  &&  make \
+  &&  :
 
 ## 2nd stage
 FROM mysql:5.7
